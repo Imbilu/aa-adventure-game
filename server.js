@@ -44,6 +44,16 @@ const server = http.createServer((req, res) => {
     }
 
     // Phase 2: POST /player
+    if(req.method === 'POST' && req.url === '/player'){
+      let playerName = req.body.name;
+      let room = world.rooms[req.body.roomID];
+      player = new Player(req.body.name, room);
+
+      res.statusCode = 302;
+      res.setHeader('location', '/rooms/' + req.body.roomID);
+      return res.end;
+
+    }
 
     // Phase 3: GET /rooms/:roomId
 
